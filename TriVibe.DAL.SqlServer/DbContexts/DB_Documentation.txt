@@ -1,0 +1,74 @@
+﻿==============================
+ApplicationDbContext – Barber və Customer 1:1 Relation İzahı
+==============================
+
+1. Giriş
+---------
+Bizim sistemdə istifadəçilər üç əsas rola bölünür: Admin, Barber və Customer. 
+Bütün istifadəçilər üçün ortaq məlumatlar User entity-də saxlanılır: ad, soyad, email və password hash.
+
+Barber və Customer entity-ləri isə əlavə məlumatlar saxlayır:
+- Barber: Bio, Services, WorkHours, Profile Image
+- Customer: PhoneNumber, LoyaltyPoints, Appointments
+
+Bu əlavə məlumatları saxlayacaq **ayrı table-lar** yaratmaq və User ilə 1:1 əlaqələndirmək lazımdır.
+
+---
+
+2. Niyə 1:1 relation lazımdır?
+--------------------------------
+Barber və Customer hər biri mütləq bir User ilə bağlıdır. Bu səbəbdən:
+- Hər Barber / Customer **mütləq bir User-ə aid olmalıdır**
+- Database-də Foreign Key (UserId) vasitəsilə əlaqə qurulur
+- EF Core bunu migration zamanı düzgün table-lar və constraints ilə yaradır
+
+Əgər relation yazılmazsa:
+- Barber və Customer table-ları **User ilə əlaqəsiz olacaq**
+- Foreign Key olmayacaq
+- Məlumatların idarəsi və CQRS əməliyyatları çətinləşəcək
+
+---
+
+3. Kod nümunəsi
+----------------
+DbSet-lər ApplicationDbContext-də belə təyin olunur:
+
+public DbSet<User> Users { get; set; }
+public DbSet<Barber> Barbers { get; set; }
+public DbSet<Customer> Customers { get; set; }
+public DbSet<Service> Services { get; set; }
+public DbSet<Appointment> Appointments { get; set; }
+
+OnModelCreating metodu ilə relation belə yaradılır:
+
+modelBuilder.Entity<Barber>()
+    .HasOne<User>()
+    .WithOne()
+    .HasForeignKey<Barber>(b => b.Id);
+
+modelBuilder.Entity<Customer>()
+    .HasOne<User>()
+    .WithOne()
+    .HasForeignKey<Customer>(c => c.Id);
+
+---
+
+4. Migration Prosesi
+--------------------
+1. DbSet və OnModelCreating əlavə etdikdən sonra migration yaradın:
+   > dotnet ef migrations add AddBarberCustomerTables
+
+2. Database-i update edin:
+   > dotnet ef database update
+
+Bu əməliyyatlar nəticəsində:
+- Barber və Customer table-ları yaranacaq
+- Hər biri User table ilə 1:1 bağlı olacaq
+
+---
+
+5. Nəticə
+----------
+- 1:1 relation yazmaq **mütləq tövsiyə olunur**, çünki bu **User ilə əlavə məlumatların əlaqəsini təmin edir**
+- Table-lar ayrıca saxlanır, sistemin genişlənməsi asanlaşır
+- CQRS əməliyyatları (Command/Query) düzgün şəkildə işləyir

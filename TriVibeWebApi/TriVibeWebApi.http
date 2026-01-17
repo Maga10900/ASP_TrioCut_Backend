@@ -1,0 +1,6 @@
+@TriVibeWebApi_HostAddress = http://localhost:5232
+
+GET {{TriVibeWebApi_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###

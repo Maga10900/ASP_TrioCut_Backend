@@ -1,0 +1,58 @@
+﻿==============================
+Barber Proyekti – Entity Strukturu İzahı
+==============================
+
+1. Giriş
+---------
+Barber sistemində istifadəçilər üç əsas rola bölünür: Admin, Barber və Customer. 
+Bütün istifadəçilər üçün ortaq məlumatlar User entity-də saxlanılır: ad, soyad, e-poçt və şifrə.  
+
+Lakin, Barber və Customer rollarına aid xüsusi məlumatlar User entity-də saxlanılmamalıdır. 
+Bu səbəbdən hər biri üçün ayrıca entity yaradılır.
+
+2. Niyə ayrı entity-lər yaradılır?
+----------------------------------
+
+2.1 Barber Entity
+-----------------
+Barber-lərin özlərinə məxsus xüsusiyyətləri var:
+- Bio/Description: Bərbərin təcrübəsi və bacarıqları haqqında məlumat
+- PhoneNumber və Profil şəkli: Müştərilərin bərbəri tanıması üçün
+- Services: Hər bərbərin fərqli xidmətləri ola bilər (saç kəsimi, saqqal düzəlişi və s.)
+- Appointments: Hər bərbərin öz rezervasiyaları var
+- WorkHours / Schedule: İş qrafiki və mövcud vaxt slotları
+
+Bu məlumatlar User entity-də saxlanılsa, model çox böyük və idarəsi çətin olacaq. 
+Ona görə Barber üçün ayrıca entity yaradılır və User entity ilə bir-birinə əlaqələndirilir (one-to-one və ya one-to-many).
+
+2.2 Customer Entity
+-------------------
+Customer-lərin də özlərinə məxsus məlumatları var:
+- PhoneNumber: Rezervasiya üçün əlaqə nömrəsi
+- Appointments: Müştərinin etdiyi bütün rezervasiyalar
+- LoyaltyPoints və ya xüsusi statuslar: Müştəri üçün əlavə məlumat
+
+Customer məlumatları da User entity-də saxlanarsa, həm məlumat qarışar, həm də sistemin genişləndirilməsi çətinləşər. 
+Ona görə Customer üçün ayrıca entity yaradılır.
+
+3. Admin üçün entity niyə yoxdur?
+----------------------------------
+- Admin-lərin əlavə şəxsi məlumatları yoxdur
+- Admin yalnız idarəetmə funksiyalarını yerinə yetirir
+- Admin-in bütün məlumatları User entity-də mövcuddur
+- Ona görə Admin üçün ayrıca entity yaratmağa ehtiyac yoxdur
+
+4. Yekun
+---------
+Sistemdə User entity hamı üçün ortaq, Barber və Customer entity-ləri isə əlavə məlumatları saxlamaq üçün yaradılmışdır. 
+Bu yanaşma aşağıdakı üstünlükləri təmin edir:
+1. Kodun təmizliyi: Fərqli məlumatlar ayrı entity-lərdə saxlanılır
+2. Scalable dizayn: Yeni xüsusiyyətlər əlavə etmək asan olur
+3. Rol əsaslı funksionallıq: Controller-lər vasitəsilə hər rolun öz imkanlarını idarə etmək mümkündür
+4. Məlumatların ayrılığı: Hər istifadəçi növü öz spesifik məlumatlarını saxlayır, qarışıqlıq yaranmır
+
+Qısa diaqram:
+---------------
+User
+ ├── Barber (1:1)
+ └── Customer (1:1)
