@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using TriVibe.DAL.SqlServer.DbContexts;
 
@@ -11,9 +12,11 @@ using TriVibe.DAL.SqlServer.DbContexts;
 namespace TriVibe.DAL.SqlServer.Migrations
 {
     [DbContext(typeof(TrioCutDb))]
-    partial class TrioCutDbModelSnapshot : ModelSnapshot
+    [Migration("20260228143710_mig4")]
+    partial class mig4
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -307,44 +310,6 @@ namespace TriVibe.DAL.SqlServer.Migrations
                     b.ToTable("Customers");
                 });
 
-            modelBuilder.Entity("TriVibe.Domain.Entities.Concretes.Notification", b =>
-                {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<DateTime>("CreatedDate")
-                        .HasColumnType("datetime2");
-
-                    b.Property<DateTime?>("DeletedDate")
-                        .HasColumnType("datetime2");
-
-                    b.Property<bool>("IsDeleted")
-                        .HasColumnType("bit");
-
-                    b.Property<bool>("IsRead")
-                        .HasColumnType("bit");
-
-                    b.Property<string>("Message")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<Guid?>("OrderId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<DateTime?>("UpdatedDate")
-                        .HasColumnType("datetime2");
-
-                    b.Property<Guid>("WorkerId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("WorkerId");
-
-                    b.ToTable("Notifications");
-                });
-
             modelBuilder.Entity("TriVibe.Domain.Entities.Concretes.Order", b =>
                 {
                     b.Property<Guid>("Id")
@@ -372,9 +337,6 @@ namespace TriVibe.DAL.SqlServer.Migrations
 
                     b.Property<decimal>("Salary")
                         .HasColumnType("decimal(18,2)");
-
-                    b.Property<int>("Status")
-                        .HasColumnType("int");
 
                     b.Property<DateTime?>("UpdatedDate")
                         .HasColumnType("datetime2");
@@ -558,17 +520,6 @@ namespace TriVibe.DAL.SqlServer.Migrations
                         .HasForeignKey("BarberId");
 
                     b.Navigation("Barber");
-                });
-
-            modelBuilder.Entity("TriVibe.Domain.Entities.Concretes.Notification", b =>
-                {
-                    b.HasOne("TriVibe.Domain.Entities.Concretes.Worker", "Worker")
-                        .WithMany()
-                        .HasForeignKey("WorkerId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Worker");
                 });
 
             modelBuilder.Entity("TriVibe.Domain.Entities.Concretes.Order", b =>

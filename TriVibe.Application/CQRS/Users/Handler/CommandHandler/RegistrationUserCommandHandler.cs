@@ -37,6 +37,19 @@ public class RegistrationUserCommandHandler : IRequestHandler<RegistrationUserCo
 				Job = request.Job
 			};
 		}
+		else if (request.UserType == TriVibe.Domain.UserType.Client)
+		{
+			newUser = new Client
+			{
+				FirstName = request.FirstName,
+				LastName = request.LastName,
+				Email = request.Email,
+				PasswordHash = hashedPassword,
+				PhoneNumber = request.PhoneNumber,
+				UserType = request.UserType,
+				Age = request.Age
+			};
+		}
 		else
 		{
 			newUser = new User

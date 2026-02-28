@@ -21,6 +21,7 @@ public class UpdateWorkerCommandHandler : IRequestHandler<UpdateWorkerCommandReq
         
         worker.FirstName = request.FirstName;
         worker.LastName = request.LastName;
+        worker.Email = request.Email;
         worker.PhoneNumber = request.PhoneNumber;
         worker.Age = request.Age;
         worker.ProfilePhoto = request.ProfilePhoto;

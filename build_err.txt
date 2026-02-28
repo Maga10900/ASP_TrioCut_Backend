@@ -1,0 +1,15 @@
+﻿  Geri y├╝klenecek projeler belirleniyor...
+  Geri y├╝kleme i├ºin t├╝m projeler g├╝ncel.
+  TriVibe.Common -> C:\Users\Muhammad\OneDrive\Masa├╝st├╝\Yeni klas├╢r\ASP_TrioCut_Backend\TriVibe.Common\bin\Debug\net8.0\TriVibe.Common.dll
+  TriVibe.Domain -> C:\Users\Muhammad\OneDrive\Masa├╝st├╝\Yeni klas├╢r\ASP_TrioCut_Backend\TriVibe.Domain\bin\Debug\net8.0\TriVibe.Domain.dll
+C:\Users\Muhammad\OneDrive\Masa├╝st├╝\Yeni klas├╢r\ASP_TrioCut_Backend\TriVibe.Repository\Repositories\INotificationRepository.cs(6,44): error CS0246: 'IGenericRepository<>' t├╝r├╝ veya ad alan─▒ ad─▒ bulunamad─▒ (bir using y├╢nergeniz veya derleme ba┼ƒvurunuz mu eksik?) [C:\Users\Muhammad\OneDrive\Masa├╝st├╝\Yeni klas├╢r\ASP_TrioCut_Backend\TriVibe.Repository\TriVibe.Repository.csproj]
+
+Olu┼ƒturma BA┼₧ARISIZ OLDU.
+
+C:\Users\Muhammad\OneDrive\Masa├╝st├╝\Yeni klas├╢r\ASP_TrioCut_Backend\TriVibe.Repository\Repositories\INotificationRepository.cs(6,44): error CS0246: 'IGenericRepository<>' t├╝r├╝ veya ad alan─▒ ad─▒ bulunamad─▒ (bir using y├╢nergeniz veya derleme ba┼ƒvurunuz mu eksik?) [C:\Users\Muhammad\OneDrive\Masa├╝st├╝\Yeni klas├╢r\ASP_TrioCut_Backend\TriVibe.Repository\TriVibe.Repository.csproj]
+    0 Uyar─▒
+    1 Hata
+
+Ge├ºen S├╝re 00:00:01.25
+
+─░┼ƒ y├╝k├╝ g├╝ncelle┼ƒtirmeleri var. Daha fazla bilgi i├ºin `dotnet workload list` ├ºal─▒┼ƒt─▒r─▒n.

@@ -12,6 +12,9 @@ public class Worker : User
 	// Bir işçinin bir neçə rəyi ola bilər
 	public List<Review>? Reviews { get; set; }
 
+	// Bir işçinin bir neçə sifarişi ola bilər
+	public List<Order>? Orders { get; set; }
+
 	public Guid? ClientId { get; set; }
 	public Client? Client { get; set; }
 }
