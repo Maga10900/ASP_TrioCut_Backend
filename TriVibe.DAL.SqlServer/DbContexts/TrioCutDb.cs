@@ -13,8 +13,16 @@ public class TrioCutDb : DbContext
 	public DbSet<Admin> Admins { get; set; }
 	public DbSet<Appointment> Appointments { get; set; }
 	public DbSet<Review> Reviews { get; set; }
+	public DbSet<Worker> Workers { get; set; }
+	public DbSet<Client> Clients { get; set; }
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
+        modelBuilder.Entity<Worker>()
+            .HasOne(w => w.Client)
+            .WithMany(c => c.Workers)
+            .HasForeignKey(w => w.ClientId)
+            .OnDelete(DeleteBehavior.SetNull);
+
         modelBuilder.Entity<Appointment>()
             .HasIndex(a => new { a.BarberEmail, a.AppointmentDate })
             .IsUnique()
@@ -24,6 +32,18 @@ public class TrioCutDb : DbContext
             .HasOne(r => r.Barber)
             .WithMany(b => b.Reviews)
             .HasForeignKey(r => r.BarberId)
+            .OnDelete(DeleteBehavior.Cascade);
+
+        modelBuilder.Entity<Review>()
+            .HasOne(r => r.Worker)
+            .WithMany(w => w.Reviews)
+            .HasForeignKey(r => r.WorkerId)
+            .OnDelete(DeleteBehavior.Cascade);
+
+        modelBuilder.Entity<Review>()
+            .HasOne(r => r.Client)
+            .WithMany(c => c.Reviews)
+            .HasForeignKey(r => r.ClientId)
             .OnDelete(DeleteBehavior.Cascade);
 
         base.OnModelCreating(modelBuilder);

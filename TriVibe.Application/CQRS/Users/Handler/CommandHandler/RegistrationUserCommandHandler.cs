@@ -22,16 +22,34 @@ public class RegistrationUserCommandHandler : IRequestHandler<RegistrationUserCo
 		if (user != null)
 			throw new Exception("This email is already registered");
 		var hashedPassword = PasswordHasher.ComputeStringToSha256Hash(request.Password);
-		var newUser = new User
+		User newUser;
+		if (request.UserType == TriVibe.Domain.UserType.Worker)
 		{
-			FirstName = request.FirstName,
-			LastName = request.LastName,
-			Email = request.Email,
-			PasswordHash = hashedPassword,
-			PhoneNumber = request.PhoneNumber,
-			UserType = request.UserType,
-			Age = request.Age
-		};
+			newUser = new Worker
+			{
+				FirstName = request.FirstName,
+				LastName = request.LastName,
+				Email = request.Email,
+				PasswordHash = hashedPassword,
+				PhoneNumber = request.PhoneNumber,
+				UserType = request.UserType,
+				Age = request.Age,
+				Job = request.Job
+			};
+		}
+		else
+		{
+			newUser = new User
+			{
+				FirstName = request.FirstName,
+				LastName = request.LastName,
+				Email = request.Email,
+				PasswordHash = hashedPassword,
+				PhoneNumber = request.PhoneNumber,
+				UserType = request.UserType,
+				Age = request.Age
+			};
+		}
 		await _unitOfWork.Users.RegisterAsync(newUser);
 		await _unitOfWork.SaveChangesAsync();
 		var response = new RegistrationUserCommandResponse

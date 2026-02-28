@@ -34,7 +34,7 @@ public class AddReviewCommandHandler : IRequestHandler<AddReviewCommandRequest, 
             Rating = review.Rating,
             Comment = review.Comment,
             Author = review.Author,
-            BarberId = review.BarberId
+            BarberId = review.BarberId ?? Guid.Empty
         };
         return new ResponseModel<AddReviewCommandResponse>(response);
     }

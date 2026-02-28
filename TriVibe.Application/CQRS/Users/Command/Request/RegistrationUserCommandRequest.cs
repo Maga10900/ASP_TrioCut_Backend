@@ -13,4 +13,5 @@ public class RegistrationUserCommandRequest:IRequest<ResponseModel<RegistrationU
 	public string PhoneNumber{ get; set; }
 	public int Age { get; set; }
 	public UserType UserType { get; set; }
+	public string? Job { get; set; }
 }

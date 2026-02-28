@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using TriVibe.DAL.SqlServer.DbContexts;
 
@@ -11,9 +12,11 @@ using TriVibe.DAL.SqlServer.DbContexts;
 namespace TriVibe.DAL.SqlServer.Migrations
 {
     [DbContext(typeof(TrioCutDb))]
-    partial class TrioCutDbModelSnapshot : ModelSnapshot
+    [Migration("20260227235951_AddWorkerEntity")]
+    partial class AddWorkerEntity
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -189,64 +192,6 @@ namespace TriVibe.DAL.SqlServer.Migrations
                     b.ToTable("Barbers");
                 });
 
-            modelBuilder.Entity("TriVibe.Domain.Entities.Concretes.Client", b =>
-                {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<int>("Age")
-                        .HasColumnType("int");
-
-                    b.Property<DateTime>("CreatedDate")
-                        .HasColumnType("datetime2");
-
-                    b.Property<DateTime?>("DeletedDate")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("Description")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Email")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("FirstName")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<bool>("IsDeleted")
-                        .HasColumnType("bit");
-
-                    b.Property<string>("LastName")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("PasswordHash")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("PhoneNumber")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("ProfilePhoto")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<double>("Rating")
-                        .HasColumnType("float");
-
-                    b.Property<DateTime?>("UpdatedDate")
-                        .HasColumnType("datetime2");
-
-                    b.Property<int>("UserType")
-                        .HasColumnType("int");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Clients");
-                });
-
             modelBuilder.Entity("TriVibe.Domain.Entities.Concretes.Customer", b =>
                 {
                     b.Property<Guid>("Id")
@@ -320,9 +265,6 @@ namespace TriVibe.DAL.SqlServer.Migrations
                     b.Property<Guid?>("BarberId")
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<Guid?>("ClientId")
-                        .HasColumnType("uniqueidentifier");
-
                     b.Property<string>("Comment")
                         .HasColumnType("nvarchar(max)");
 
@@ -347,8 +289,6 @@ namespace TriVibe.DAL.SqlServer.Migrations
                     b.HasKey("Id");
 
                     b.HasIndex("BarberId");
-
-                    b.HasIndex("ClientId");
 
                     b.HasIndex("WorkerId");
 
@@ -396,9 +336,6 @@ namespace TriVibe.DAL.SqlServer.Migrations
 
                     b.Property<int>("Age")
                         .HasColumnType("int");
-
-                    b.Property<Guid?>("ClientId")
-                        .HasColumnType("uniqueidentifier");
 
                     b.Property<DateTime>("CreatedDate")
                         .HasColumnType("datetime2");
@@ -449,8 +386,6 @@ namespace TriVibe.DAL.SqlServer.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("ClientId");
-
                     b.ToTable("Workers");
                 });
 
@@ -485,11 +420,6 @@ namespace TriVibe.DAL.SqlServer.Migrations
                         .HasForeignKey("BarberId")
                         .OnDelete(DeleteBehavior.Cascade);
 
-                    b.HasOne("TriVibe.Domain.Entities.Concretes.Client", "Client")
-                        .WithMany("Reviews")
-                        .HasForeignKey("ClientId")
-                        .OnDelete(DeleteBehavior.Cascade);
-
                     b.HasOne("TriVibe.Domain.Entities.Concretes.Worker", "Worker")
                         .WithMany("Reviews")
                         .HasForeignKey("WorkerId")
@@ -497,19 +427,7 @@ namespace TriVibe.DAL.SqlServer.Migrations
 
                     b.Navigation("Barber");
 
-                    b.Navigation("Client");
-
                     b.Navigation("Worker");
-                });
-
-            modelBuilder.Entity("TriVibe.Domain.Entities.Concretes.Worker", b =>
-                {
-                    b.HasOne("TriVibe.Domain.Entities.Concretes.Client", "Client")
-                        .WithMany("Workers")
-                        .HasForeignKey("ClientId")
-                        .OnDelete(DeleteBehavior.SetNull);
-
-                    b.Navigation("Client");
                 });
 
             modelBuilder.Entity("TriVibe.Domain.Entities.Concretes.Barber", b =>
@@ -517,13 +435,6 @@ namespace TriVibe.DAL.SqlServer.Migrations
                     b.Navigation("Customers");
 
                     b.Navigation("Reviews");
-                });
-
-            modelBuilder.Entity("TriVibe.Domain.Entities.Concretes.Client", b =>
-                {
-                    b.Navigation("Reviews");
-
-                    b.Navigation("Workers");
                 });
 
             modelBuilder.Entity("TriVibe.Domain.Entities.Concretes.Worker", b =>

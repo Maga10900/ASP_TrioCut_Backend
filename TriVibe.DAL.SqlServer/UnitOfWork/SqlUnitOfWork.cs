@@ -22,6 +22,8 @@ public class SqlUnitOfWork : IUnitOfWork
     public SqlServiceRepository _serviceRepository;
     public SqlAppointmentRepository _appointmentRepository;
     public SqlReviewRepository _reviewRepository;
+    public SqlWorkerRepository _workerRepository;
+    public SqlClientRepository _clientRepository;
 
     public IUserRepository Users => _userRepository ??= new SqlUserRepository(_connectionString, _context);
 	public IBarberRepository Barbers => _barberRepository ??= new SqlBarberRepository(_connectionString, _context);
@@ -29,6 +31,8 @@ public class SqlUnitOfWork : IUnitOfWork
     public IServiceRepository Services => _serviceRepository ??= new SqlServiceRepository(_connectionString, _context);
     public IAppointmentRepository Appointments => _appointmentRepository ??= new SqlAppointmentRepository(_connectionString, _context);
     public IReviewRepository Reviews => _reviewRepository ??= new SqlReviewRepository(_connectionString, _context);
+    public IWorkerRepository Workers => _workerRepository ??= new SqlWorkerRepository(_connectionString, _context);
+    public IClientRepository Clients => _clientRepository ??= new SqlClientRepository(_connectionString, _context);
 
     public async Task SaveChangesAsync()
     {

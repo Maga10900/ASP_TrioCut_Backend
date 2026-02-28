@@ -10,5 +10,7 @@ public interface IUnitOfWork
     public IServiceRepository Services { get; }
     public IAppointmentRepository Appointments { get; }
     public IReviewRepository Reviews { get; }
+    public IWorkerRepository Workers { get; }
+    public IClientRepository Clients { get; }
     public Task SaveChangesAsync();
 }

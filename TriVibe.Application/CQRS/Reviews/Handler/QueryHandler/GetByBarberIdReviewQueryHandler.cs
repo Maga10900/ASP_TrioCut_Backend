@@ -24,7 +24,7 @@ public class GetByBarberIdReviewQueryHandler : IRequestHandler<GetByBarberIdRevi
             Id = r.Id, 
             Rating = r.Rating, 
             Comment = r.Comment, 
-            BarberId = r.BarberId,
+            BarberId = r.BarberId ?? Guid.Empty,
             Author = r.Author
         }).ToList();
         
