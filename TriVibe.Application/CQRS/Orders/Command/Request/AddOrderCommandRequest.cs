@@ -11,4 +11,5 @@ public class AddOrderCommandRequest : IRequest<ResponseModel<AddOrderCommandResp
     public string Address { get; set; }
     public List<string>? Photos { get; set; }
     public string? Details { get; set; }
+    public Guid ClientId { get; set; }
 }

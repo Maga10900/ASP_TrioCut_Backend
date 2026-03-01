@@ -21,6 +21,7 @@ public class AddOrderCommandHandler : IRequestHandler<AddOrderCommandRequest, Re
         var order = new Order
         {
             WorkerId = request.WorkerId,
+            ClientId = request.ClientId,
             Salary = request.Salary,
             Address = request.Address,
             Photos = request.Photos,

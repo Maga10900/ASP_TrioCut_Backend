@@ -90,6 +90,7 @@ public class SqlUserRepository : SqlBaseRepository, IUserRepository
 		}
 		else if (user.UserType == UserType.Worker)
 		{
+			var incomingWorker = user as Worker;
 			var worker = new Worker
 			{
 				FirstName = user.FirstName,
@@ -98,7 +99,8 @@ public class SqlUserRepository : SqlBaseRepository, IUserRepository
 				PasswordHash = user.PasswordHash,
 				PhoneNumber = user.PhoneNumber,
 				Age = user.Age,
-				UserType = user.UserType
+				UserType = user.UserType,
+				Job = incomingWorker?.Job
 			};
 			await _context.Workers.AddAsync(worker);
 		}

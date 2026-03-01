@@ -15,4 +15,6 @@ public class Client : User
     public List<Review>? Reviews { get; set; }
 
     public List<Notification>? Notifications { get; set; }
+
+    public List<Order>? Orders { get; set; }
 }

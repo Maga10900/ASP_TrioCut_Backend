@@ -71,4 +71,12 @@ public class OrderController : ControllerBase
         var response = await _mediator.Send(request);
         return Ok(response);
     }
+
+    [HttpGet("client/{clientId}")]
+    public async Task<IActionResult> GetByClientId(Guid clientId)
+    {
+        var request = new GetOrdersByClientIdQueryRequest { ClientId = clientId };
+        var response = await _mediator.Send(request);
+        return Ok(response);
+    }
 }

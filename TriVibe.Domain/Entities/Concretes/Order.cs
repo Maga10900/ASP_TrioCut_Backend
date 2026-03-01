@@ -14,4 +14,8 @@ public class Order : BaseEntity
     // FK to Worker
     public Guid WorkerId { get; set; }
     public Worker? Worker { get; set; }
+
+    // FK to Client
+    public Guid? ClientId { get; set; }
+    public Client? Client { get; set; }
 }
