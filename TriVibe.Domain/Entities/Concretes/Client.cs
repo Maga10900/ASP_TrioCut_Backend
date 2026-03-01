@@ -13,4 +13,6 @@ public class Client : User
 
     // Bir klentin bir neçə rəyi ola bilər
     public List<Review>? Reviews { get; set; }
+
+    public List<Notification>? Notifications { get; set; }
 }

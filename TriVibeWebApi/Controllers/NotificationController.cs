@@ -24,6 +24,14 @@ public class NotificationController : ControllerBase
         return Ok(response);
     }
 
+    [HttpGet("{clientId}")]
+    public async Task<IActionResult> Client(Guid clientId)
+    {
+        var request = new GetClientNotificationsQueryRequest { ClientId = clientId };
+        var response = await _mediator.Send(request);
+        return Ok(response);
+    }
+
     [HttpPut("{id}")]
     public async Task<IActionResult> MarkAsRead(Guid id)
     {

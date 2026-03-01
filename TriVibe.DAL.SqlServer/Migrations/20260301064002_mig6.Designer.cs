@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using TriVibe.DAL.SqlServer.DbContexts;
 
@@ -11,9 +12,11 @@ using TriVibe.DAL.SqlServer.DbContexts;
 namespace TriVibe.DAL.SqlServer.Migrations
 {
     [DbContext(typeof(TrioCutDb))]
-    partial class TrioCutDbModelSnapshot : ModelSnapshot
+    [Migration("20260301064002_mig6")]
+    partial class mig6
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

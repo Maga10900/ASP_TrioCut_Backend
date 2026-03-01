@@ -6,33 +6,34 @@ using TriVibe.Repository.Common;
 
 namespace TriVibe.Application.CQRS.Orders.Handler.QueryHandler;
 
-public class GetWorkerNotificationsQueryHandler : IRequestHandler<GetWorkerNotificationsQueryRequest, ResponseModel<List<GetWorkerNotificationsQueryResponse>>>
+public class GetClientNotificationsQueryHandler : IRequestHandler<GetClientNotificationsQueryRequest, ResponseModel<List<GetClientNotificationsQueryResponse>>>
 {
     private readonly IUnitOfWork _unitOfWork;
 
-    public GetWorkerNotificationsQueryHandler(IUnitOfWork unitOfWork)
+    public GetClientNotificationsQueryHandler(IUnitOfWork unitOfWork)
     {
         _unitOfWork = unitOfWork;
     }
 
-    public async Task<ResponseModel<List<GetWorkerNotificationsQueryResponse>>> Handle(GetWorkerNotificationsQueryRequest request, CancellationToken cancellationToken)
+    public async Task<ResponseModel<List<GetClientNotificationsQueryResponse>>> Handle(GetClientNotificationsQueryRequest request, CancellationToken cancellationToken)
     {
         var notificationsList = await _unitOfWork.Notifications.GetAllAsync();
         var notifications = notificationsList
-                            .Where(n => n.WorkerId.HasValue && n.WorkerId.Value == request.WorkerId)
+                            .Where(n => n.ClientId.HasValue && n.ClientId.Value == request.ClientId)
                             .OrderByDescending(n => n.CreatedDate)
                             .ToList();
 
-        var response = notifications.Select(n => new GetWorkerNotificationsQueryResponse
+        var response = notifications.Select(n => new GetClientNotificationsQueryResponse
         {
             Id = n.Id,
             WorkerId = n.WorkerId,
+            ClientId = n.ClientId,
             OrderId = n.OrderId,
             Message = n.Message,
             IsRead = n.IsRead,
-            CreatedDate = n.CreatedDate // Ensure BaseEntity has CreatedDate
+            CreatedDate = n.CreatedDate
         }).ToList();
 
-        return new ResponseModel<List<GetWorkerNotificationsQueryResponse>>(response);
+        return new ResponseModel<List<GetClientNotificationsQueryResponse>>(response);
     }
 }
