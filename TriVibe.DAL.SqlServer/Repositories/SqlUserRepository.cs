@@ -46,78 +46,31 @@ public class SqlUserRepository : SqlBaseRepository, IUserRepository
 
 	public async Task RegisterAsync(User user)
 	{
-		if (user.UserType == UserType.Customer)
+		if (user is Customer customer)
 		{
-			var customer = new Customer
-			{
-				FirstName = user.FirstName,
-				LastName = user.LastName,
-				Email = user.Email,
-				PasswordHash = user.PasswordHash,
-				PhoneNumber = user.PhoneNumber,
-				Age = user.Age,
-				UserType = user.UserType
-			};
 			await _context.Customers.AddAsync(customer);
 		}
-		else if (user.UserType == UserType.Barber)
+		else if (user is Barber barber)
 		{
-			var barber = new Barber
-			{
-				FirstName = user.FirstName,
-				LastName = user.LastName,
-				Email = user.Email,
-				PasswordHash = user.PasswordHash,
-				PhoneNumber = user.PhoneNumber,
-				Age = user.Age,
-				UserType = user.UserType
-			};
 			await _context.Barbers.AddAsync(barber);
 		}
-		else if (user.UserType == UserType.Admin)
+		else if (user is Admin admin)
 		{
-			var admin = new Admin
-			{
-				FirstName = user.FirstName,
-				LastName = user.LastName,
-				Email = user.Email,
-				PasswordHash = user.PasswordHash,
-				PhoneNumber = user.PhoneNumber,
-				Age = user.Age,
-				UserType = user.UserType
-			};
 			await _context.Admins.AddAsync(admin);
 		}
-		else if (user.UserType == UserType.Worker)
+		else if (user is Worker worker)
 		{
-			var incomingWorker = user as Worker;
-			var worker = new Worker
-			{
-				FirstName = user.FirstName,
-				LastName = user.LastName,
-				Email = user.Email,
-				PasswordHash = user.PasswordHash,
-				PhoneNumber = user.PhoneNumber,
-				Age = user.Age,
-				UserType = user.UserType,
-				Job = incomingWorker?.Job
-			};
 			await _context.Workers.AddAsync(worker);
 		}
-		else if (user.UserType == UserType.Client)
+		else if (user is Client client)
 		{
-			var client = new Client
-			{
-				FirstName = user.FirstName,
-				LastName = user.LastName,
-				Email = user.Email,
-				PasswordHash = user.PasswordHash,
-				PhoneNumber = user.PhoneNumber,
-				Age = user.Age,
-				UserType = user.UserType
-			};
 			await _context.Clients.AddAsync(client);
 		}
+		else 
+		{
+			throw new ArgumentException("Unknown user type", nameof(user));
+		}
+		
 		await _context.SaveChangesAsync();
 	}
 }

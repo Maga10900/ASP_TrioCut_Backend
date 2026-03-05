@@ -58,6 +58,8 @@ builder.Services.AddAuthenticationDependencies(builder.Configuration);
 
 var app = builder.Build();
 
+app.UseMiddleware<TriVibeWebApi.Middlewares.GlobalExceptionMiddleware>();
+
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {

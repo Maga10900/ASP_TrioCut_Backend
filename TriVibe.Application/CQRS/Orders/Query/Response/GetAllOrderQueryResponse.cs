@@ -4,6 +4,7 @@ public class GetAllOrderQueryResponse
 {
     public Guid Id { get; set; }
     public Guid WorkerId { get; set; }
+    public Guid? ClientId { get; set; }
     public decimal Salary { get; set; }
     public string Address { get; set; }
     public List<string>? Photos { get; set; }

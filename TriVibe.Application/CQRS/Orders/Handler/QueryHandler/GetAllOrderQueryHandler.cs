@@ -23,6 +23,7 @@ public class GetAllOrderQueryHandler : IRequestHandler<GetAllOrderQueryRequest, 
         {
             Id = o.Id,
             WorkerId = o.WorkerId,
+            ClientId = o.ClientId,
             Salary = o.Salary,
             Address = o.Address,
             Photos = o.Photos,

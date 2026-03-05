@@ -1,0 +1,14 @@
+﻿  Geri y├╝klenecek projeler belirleniyor...
+  Geri y├╝kleme i├ºin t├╝m projeler g├╝ncel.
+  TriVibe.Common -> C:\Users\Muhammad\OneDrive\Masa├╝st├╝\Yeni klas├╢r\ASP_TrioCut_Backend\TriVibe.Common\bin\Debug\net8.0\TriVibe.Common.dll
+C:\Program Files\dotnet\sdk\9.0.308\Roslyn\Microsoft.CSharp.Core.targets(84,5): error : Out of memory. [C:\Users\Muhammad\OneDrive\Masa├╝st├╝\Yeni klas├╢r\ASP_TrioCut_Backend\TriVibe.Domain\TriVibe.Domain.csproj]
+
+Olu┼ƒturma BA┼₧ARISIZ OLDU.
+
+C:\Program Files\dotnet\sdk\9.0.308\Roslyn\Microsoft.CSharp.Core.targets(84,5): error : Out of memory. [C:\Users\Muhammad\OneDrive\Masa├╝st├╝\Yeni klas├╢r\ASP_TrioCut_Backend\TriVibe.Domain\TriVibe.Domain.csproj]
+    0 Uyar─▒
+    1 Hata
+
+Ge├ºen S├╝re 00:00:27.58
+
+─░┼ƒ y├╝k├╝ g├╝ncelle┼ƒtirmeleri var. Daha fazla bilgi i├ºin `dotnet workload list` ├ºal─▒┼ƒt─▒r─▒n.

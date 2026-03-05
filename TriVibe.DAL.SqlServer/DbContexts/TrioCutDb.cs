@@ -17,6 +17,7 @@ public class TrioCutDb : DbContext
 	public DbSet<Client> Clients { get; set; }
 	public DbSet<Order> Orders { get; set; }
 	public DbSet<Notification> Notifications { get; set; }
+    public DbSet<PaymentCard> PaymentCards { get; set; }
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         modelBuilder.Entity<Worker>()

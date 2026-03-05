@@ -1,5 +1,7 @@
 using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using System.Security.Claims;
 using TriVibe.Application.CQRS.Orders.Command.Request;
 using TriVibe.Application.CQRS.Orders.Query.Request;
 
@@ -17,8 +19,15 @@ public class OrderController : ControllerBase
     }
 
     [HttpPost]
+    [Authorize(Roles = "Client")]
     public async Task<IActionResult> Create([FromBody] AddOrderCommandRequest request)
     {
+        var clientIdClaim = User.FindFirstValue(ClaimTypes.NameIdentifier);
+        if (Guid.TryParse(clientIdClaim, out Guid clientId))
+        {
+            request.ClientId = clientId;
+        }
+
         var response = await _mediator.Send(request);
         return Ok(response);
     }

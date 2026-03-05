@@ -18,6 +18,9 @@ public class AddOrderCommandHandler : IRequestHandler<AddOrderCommandRequest, Re
 
     public async Task<ResponseModel<AddOrderCommandResponse>> Handle(AddOrderCommandRequest request, CancellationToken cancellationToken)
     {
+        await _unitOfWork.Clients.GetByIdAsync(request.ClientId);
+        await _unitOfWork.Workers.GetByIdAsync(request.WorkerId);
+
         var order = new Order
         {
             WorkerId = request.WorkerId,

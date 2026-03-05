@@ -14,5 +14,6 @@ public interface IUnitOfWork
     public IClientRepository Clients { get; }
     public IOrderRepository Orders { get; }
     public INotificationRepository Notifications { get; }
+    public IPaymentCardRepository PaymentCards { get; }
     public Task SaveChangesAsync();
 }

@@ -50,6 +50,45 @@ public class RegistrationUserCommandHandler : IRequestHandler<RegistrationUserCo
 				Age = request.Age
 			};
 		}
+		else if (request.UserType == TriVibe.Domain.UserType.Customer)
+		{
+			newUser = new Customer
+			{
+				FirstName = request.FirstName,
+				LastName = request.LastName,
+				Email = request.Email,
+				PasswordHash = hashedPassword,
+				PhoneNumber = request.PhoneNumber,
+				UserType = request.UserType,
+				Age = request.Age
+			};
+		}
+		else if (request.UserType == TriVibe.Domain.UserType.Barber)
+		{
+			newUser = new Barber
+			{
+				FirstName = request.FirstName,
+				LastName = request.LastName,
+				Email = request.Email,
+				PasswordHash = hashedPassword,
+				PhoneNumber = request.PhoneNumber,
+				UserType = request.UserType,
+				Age = request.Age
+			};
+		}
+		else if (request.UserType == TriVibe.Domain.UserType.Admin)
+		{
+			newUser = new Admin
+			{
+				FirstName = request.FirstName,
+				LastName = request.LastName,
+				Email = request.Email,
+				PasswordHash = hashedPassword,
+				PhoneNumber = request.PhoneNumber,
+				UserType = request.UserType,
+				Age = request.Age
+			};
+		}
 		else
 		{
 			newUser = new User

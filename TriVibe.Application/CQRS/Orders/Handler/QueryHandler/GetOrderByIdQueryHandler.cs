@@ -23,6 +23,7 @@ public class GetOrderByIdQueryHandler : IRequestHandler<GetOrderByIdQueryRequest
         {
             Id = order.Id,
             WorkerId = order.WorkerId,
+            ClientId = order.ClientId,
             Salary = order.Salary,
             Address = order.Address,
             Photos = order.Photos,

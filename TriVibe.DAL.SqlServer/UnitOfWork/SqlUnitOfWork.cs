@@ -26,6 +26,7 @@ public class SqlUnitOfWork : IUnitOfWork
     public SqlClientRepository _clientRepository;
     public SqlOrderRepository _orderRepository;
     public SqlNotificationRepository _notificationRepository;
+    public SqlPaymentCardRepository _paymentCardRepository;
 
     public IUserRepository Users => _userRepository ??= new SqlUserRepository(_connectionString, _context);
 	public IBarberRepository Barbers => _barberRepository ??= new SqlBarberRepository(_connectionString, _context);
@@ -37,6 +38,7 @@ public class SqlUnitOfWork : IUnitOfWork
     public IClientRepository Clients => _clientRepository ??= new SqlClientRepository(_connectionString, _context);
     public IOrderRepository Orders => _orderRepository ??= new SqlOrderRepository(_connectionString, _context);
     public INotificationRepository Notifications => _notificationRepository ??= new SqlNotificationRepository(_connectionString, _context);
+    public IPaymentCardRepository PaymentCards => _paymentCardRepository ??= new SqlPaymentCardRepository(_connectionString, _context);
 
     public async Task SaveChangesAsync()
     {
